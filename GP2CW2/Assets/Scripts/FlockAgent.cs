@@ -21,7 +21,7 @@ public class FlockAgent : MonoBehaviour
 
         // set velocity for flocks
         transform.position += velocity * Time.deltaTime;
-        
+
     }
 
 
