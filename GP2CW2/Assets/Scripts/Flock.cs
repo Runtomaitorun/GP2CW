@@ -19,7 +19,7 @@ public class Flock : MonoBehaviour
 
     [Header("Neighbors")]
     [Range(1f, 10f)]
-    public float neighborRadius = 1.5f;
+    public float neighborRadius = 5f;
     [Range(0f, 1f)]
     public float avoidanceRadiusMultiplier = 0.5f;
 
@@ -51,5 +51,40 @@ public class Flock : MonoBehaviour
 
         }
     }
+
+    void Update()
+    {
+        foreach (FlockAgent agent in agents)
+        {
+            List<Transform> context = GetNearbyObjects(agent);
+            agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
+
+
+
+            //Vector2 move = behaviour.CalculateMove(agent, context, this);
+            //move *= driveFactor;
+            //if(move.sqrMagnitude > sqrMaxSpeed)
+            //{
+            //    move = move.normalized * maxSpeed;
+            //}
+            //agent.Move(move);
+        }
+    }
+
+    List<Transform> GetNearbyObjects(FlockAgent agent)
+    {
+        List<Transform> context = new List<Transform>();
+        Collider[] contextColliders = Physics.OverlapSphere(agent.transform.position, neighborRadius);
+        foreach (Collider c in contextColliders)
+        {
+            if (c != agent.AgentCollider)
+            {
+                context.Add(c.transform);
+            }
+        }
+        return context;
+    }
+
+
 
 }

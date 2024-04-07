@@ -184,7 +184,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23476b174474134fbc65befc7417f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 1076530920375738749, guid: 69ec9470510358a43a90760bb780cd18,
+  agentPrefab: {fileID: 5015876414974519244, guid: 2356e82f96f717f4faab230eed03dbb7,
     type: 3}
   behaviour: {fileID: 0}
   startingCount: 250
