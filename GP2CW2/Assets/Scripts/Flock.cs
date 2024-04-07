@@ -42,7 +42,7 @@ public class Flock : MonoBehaviour
         {
             FlockAgent newAgent = Instantiate(
                 agentPrefab,
-                Random.insideUnitCircle * startingCount * AgentDensity,// the size of the circle is based on the number and density of our flock
+                Random.insideUnitSphere * startingCount * AgentDensity,// the size of the circle is based on the number and density of our flock
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform// set the parent of all agents
                 );

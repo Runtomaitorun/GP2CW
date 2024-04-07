@@ -14,13 +14,13 @@ public class FlockAgent : MonoBehaviour
         agentCollider = GetComponent<Collider2D>();
     }
 
-    public void Move(Vector2 velocity)
+    public void Move(Vector3 velocity)
     {
         // set direction for flock velocity
-        transform.up = velocity;//transform.forward for 3D
+        transform.forward = velocity;//transform.forward for 3D
 
         // set velocity for flocks
-        transform.position += (Vector3)velocity * Time.deltaTime;
+        transform.position += velocity * Time.deltaTime;
         
     }
 
