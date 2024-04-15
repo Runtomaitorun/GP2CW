@@ -47,6 +47,7 @@ public class Flock : MonoBehaviour
                 transform// set the parent of all agents
                 );
             newAgent.name = "Agent" + i;
+            newAgent.Initialize(this);
             agents.Add(newAgent);
 
         }
