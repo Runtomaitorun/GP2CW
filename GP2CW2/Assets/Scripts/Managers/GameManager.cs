@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] flockPrefabs;
     public Canvas ideaBubble;
+
+    [Header("CharacterAnimaiton")]
+    public float durationTime = 4f;
+
+
     public void OnMouseDown()
     {
         // initiate flocks
@@ -16,13 +21,14 @@ public class GameManager : MonoBehaviour
         ShowIdeas showIdeas = ideaBubble.GetComponent<ShowIdeas>();
         if (showIdeas != null)
         {
-            showIdeas.PickIdeas(ideaBubble, flockIndex);
+            showIdeas.StartCoroutine(showIdeas.TackleIdeas(ideaBubble, flockIndex,durationTime));
         }
         else
         Debug.Log("can't find the script ShowIdeas!");
-        
-        
-        
+
+        // Set the animator
+        StartCoroutine(SetAnimation(flockIndex));
+             
 
     }
     public int IdeaSelection()
@@ -37,5 +43,25 @@ public class GameManager : MonoBehaviour
         GameObject prefab = flockPrefabs[flockIndex];
         GameObject flock = Instantiate(prefab, transform);
         flock.transform.position = new Vector3(0, 0, 0);
+    }
+
+    IEnumerator SetAnimation(int flockIndex)
+    {
+        Animator anim = GetComponentInChildren<Animator>();
+        if (anim != null)
+        {
+            // Play the disired animation
+            anim.SetInteger("Index", flockIndex);
+
+            yield return new WaitForSeconds(durationTime);
+
+            // Go back to idle
+            anim.SetInteger("Index", 100);
+            anim.SetTrigger("BackToIdle");
+        }
+        else
+            Debug.Log("can't find animtor in child of character");
+
+
     }
 }
