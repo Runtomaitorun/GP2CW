@@ -27,6 +27,9 @@ public class Flock : MonoBehaviour
     float sqrMaxSpeed;
     float sqrNeighborRadius;
     float sqrAvoidanceRadius;
+
+    [Header("StayInDuration")]
+    [SerializeField]private float destroyDuration = 15f;
     public float SqrAvoidanceRadius { get { return sqrAvoidanceRadius; } }
 
 
@@ -51,6 +54,9 @@ public class Flock : MonoBehaviour
             agents.Add(newAgent);
 
         }
+
+        //Self destroy after a time
+        StartCoroutine(DestroyAfterDuration());
     }
 
     void Update()
@@ -86,6 +92,16 @@ public class Flock : MonoBehaviour
         return context;
     }
 
+    IEnumerator DestroyAfterDuration()
+    {
+        yield return new WaitForSeconds(destroyDuration);
+
+        // Destroy it from the list
+        FlocksData.flockList.Remove(gameObject);
+
+        // Destroy the gameobject
+        Destroy(gameObject);
+    }
 
 
 }
